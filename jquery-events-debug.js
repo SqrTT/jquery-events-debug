@@ -2,6 +2,29 @@
 	$.fn.getEventsHandlers = function (target) {
 		var result = {};
 			target = target || this;
+		
+		function extendEvent (event, originalEl) {
+			if (event.extend === void(0)) {
+				var handler = event.handler;
+				event.extend = true;
+				
+				if (originalEl) {
+					event.originalEl = originalEl;
+				}
+				
+				event.enableDebug = function () {
+					event.handler = function () {
+						debugger;
+						handler.apply(this, Array.prototype.slice.call(arguments, 0));
+					};
+				};
+				
+				event.repair = function () {
+					event.handler = handler;
+				};
+			}
+		}
+		
 		function getHandlers (node) {
 			var handlers,
 				result = {};
@@ -20,10 +43,8 @@
 					var handler = stack[i];
 
 					if (target.is(node) || (handler.selector && $(node).find(handler.selector).is(target))) {
-						if (!target.is(node)) {
-							handler.originalEl = node;
-						}
-						targetStack.push($.extend({}, handler));
+						extendEvent(handler, !target.is(node) ? node : null);
+						targetStack.push(handler);
 					}
 				}
 
