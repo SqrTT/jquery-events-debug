@@ -76,4 +76,4 @@
 
 		return result;
 	};
-}(typeof require !== 'undefined' ? require('jquery') : window.jQuery);
+})(typeof require !== 'undefined' ? require('jquery') : window.jQuery);
