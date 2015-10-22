@@ -76,4 +76,4 @@
 
 		return result;
 	};
-}(jQuery));
+}(typeof require !== 'undefined' ? require('jquery') : window.jQuery);
