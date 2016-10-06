@@ -1,6 +1,6 @@
 {
   "name": "jquery-events-debug",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "helps findout handlers assigned to DOM by jQuery",
   "author": "Anatolii Obitskyi <tolik@sqrtt.pro>",
   "contributors": [{
